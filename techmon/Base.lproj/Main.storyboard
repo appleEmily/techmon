@@ -62,7 +62,7 @@
                                     <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="startBattle:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JsK-ne-yYt"/>
+                                    <action selector="startBattle" destination="BYZ-38-t0r" eventType="touchUpInside" id="OFh-T3-Jbe"/>
                                     <segue destination="RS2-9V-cHe" kind="presentation" identifier="startBattle" modalTransitionStyle="crossDissolve" id="G2y-dE-fmk"/>
                                 </connections>
                             </button>

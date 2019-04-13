@@ -38,6 +38,12 @@ class BattleViewController: UIViewController {
         playerHPBar.progress = player.currentHP / player.maxHP
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        startBattle()
+    }
+    
     func startBattle() {
         TechDraUtil.playBGM(fileName: "BGM_battle001")
         enemy = Enemy()
@@ -75,20 +81,18 @@ class BattleViewController: UIViewController {
         let finishedMessage: String
         if winPlayer == true {
             TechDraUtil.playSE(fileName: "SE_ fanfare")
-            finishedMessage = "プァイェrの勝利！"
+            finishedMessage = "プレイヤーの勝利！"
         } else {
             TechDraUtil.playSE(fileName: "SE_gameover")
             finishedMessage = "プレイヤーの敗北..."
         }
         let alert = UIAlertController(title: "バトル終了",  message: finishedMessage,preferredStyle: UIAlertController.Style.alert)
-        let action = UIAlertAction(title: "ok", style: .default, handler: { action in self.dismiss(animated: true, completion: nil)
+        let action = UIAlertAction(title: "ok", style: .default, handler: { action in
+            self.dismiss(animated: true, completion: nil)
             
         })
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
-        self.present(alert, animated: true, completion: nil)
-            
-            
         }
     
     @objc func enemyAttack() {

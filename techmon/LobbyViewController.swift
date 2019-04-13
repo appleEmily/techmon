@@ -25,7 +25,8 @@ class LobbyViewController: UIViewController {
             staminaBar.progress = stamina / maxStamina
             performSegue(withIdentifier: "startBattle", sender: nil)
         } else {
-            let alert = UIAlertController(title: "Ok", style: .default, handler: nil)
+            let alert = UIAlertController(title: "スタミナ不足", message:  "スタミナが２０以上必要です", preferredStyle: .alert)
+            let action = UIAlertAction(title: "ok", style: .default, handler: nil)
             alert.addAction(action)
             self.present(alert, animated: true, completion: nil)
             
