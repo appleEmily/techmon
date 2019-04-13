@@ -12,6 +12,7 @@ class LobbyViewController: UIViewController {
     var maxStamina: Float = 100
     var stamina: Float = 100
     var player = Player()
+    var staminaTimer: Timer!
     
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var staminaBar: UIProgressView!
@@ -19,7 +20,18 @@ class LobbyViewController: UIViewController {
     @IBOutlet var levelLabel: UILabel!
     
     @IBAction func startBattle() {
-        performSegue(withIdentifier: "startBattle", sender: nil)
+        if stamina >= 30 {
+            stamina = stamina - 20
+            staminaBar.progress = stamina / maxStamina
+            performSegue(withIdentifier: "startBattle", sender: nil)
+        } else {
+            let alert = UIAlertController(title: "Ok", style: .default, handler: nil)
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+            
+        }
+        
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -40,12 +52,21 @@ class LobbyViewController: UIViewController {
         
         stamina = maxStamina
         staminaBar.progress = stamina / maxStamina
+        
+        staminaTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector:#selector(self.cureStamina), userInfo: nil, repeats: true)
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         TechDraUtil.playBGM(fileName: "lobby")
+    }
+    @objc func cureStamina() {
+        if stamina < maxStamina {
+            stamina = min(stamina + 1, maxStamina)
+            staminaBar.progress = stamina / maxStamina
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
